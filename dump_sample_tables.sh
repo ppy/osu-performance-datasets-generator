@@ -119,8 +119,6 @@ echo "Compressing.."
 tar -cvjSf ${output_folder}.tar.bz2 ${output_folder}/*
 rm -r ${output_folder}
 
-mv ${output_folder}.tar.bz2 ${OUTPUT_PATH}/
-
 echo
 echo "All done!"
 echo
