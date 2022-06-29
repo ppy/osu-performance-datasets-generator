@@ -1,8 +1,7 @@
 #!/bin/bash
 # Select relevant sample users and dump to a file.
 
-TOP_USER_COUNT=$3
-RANDOM_USER_COUNT=$3
+USER_COUNT=$3
 
 DATABASE_HOST=db-delayed
 DATABASE_USER=performance-export
@@ -74,9 +73,9 @@ sql "Creating sample_beatmapsets table"   "DROP TABLE IF EXISTS ${sample_beatmap
 sql "Creating sample_beatmaps table"      "DROP TABLE IF EXISTS ${sample_beatmaps_table}; CREATE TABLE ${sample_beatmaps_table} ( beatmap_id INT PRIMARY KEY );"
 
 if [ "$2" == "random" ] ; then
-    sql "Populating random users.."     "INSERT IGNORE INTO ${sample_users_table} (user_id) SELECT user_id FROM osu_user_stats${table_suffix} WHERE rank_score > 0 ORDER BY RAND(1) LIMIT $RANDOM_USER_COUNT;"
+    sql "Populating random users.."     "INSERT IGNORE INTO ${sample_users_table} (user_id) SELECT user_id FROM osu_user_stats${table_suffix} WHERE rank_score > 0 ORDER BY RAND(1) LIMIT $USER_COUNT;"
 else
-    sql "Populating top users.."        "INSERT IGNORE INTO ${sample_users_table} (user_id) SELECT user_id FROM osu_user_stats${table_suffix} ORDER BY rank_score desc LIMIT $TOP_USER_COUNT"
+    sql "Populating top users.."        "INSERT IGNORE INTO ${sample_users_table} (user_id) SELECT user_id FROM osu_user_stats${table_suffix} ORDER BY rank_score desc LIMIT $USER_COUNT"
 fi
 
 sql "Adding user details.."         "REPLACE INTO ${sample_users_table} SELECT user_id, username, user_warnings, user_type FROM phpbb_users WHERE user_id IN (SELECT user_id FROM ${sample_users_table})"

@@ -1,11 +1,8 @@
 #!/bin/bash
-# Select relevant sample users and dump to a file.
-
-TOP_USER_COUNT=10000
-RANDOM_USER_COUNT=10000
+# Dump .osu files from all ranked/approved/qualified/loved beatmapsets.
 
 DATABASE_HOST=db-delayed
-DATABASE_USER=performance
+DATABASE_USER=performance-export
 
 OUTPUT_PATH=/var/www/html/
 
@@ -14,7 +11,7 @@ output_folder="${date}_osu_files"
 
 mkdir -p ${output_folder}
 
-for i in $( mysql osu -sN -h "db-delayed" -u performance-export -e "select beatmap_id from osu_beatmaps WHERE approved > 0 AND deleted_at IS NULL" ); do
+for i in $( mysql osu -sN -h "${DATABASE_HOST}" -u "${DATABASE_USER}" -e "select beatmap_id from osu_beatmaps WHERE approved > 0 AND deleted_at IS NULL" ); do
     echo "Downloading ${i}..."
     curl -s https://osu.ppy.sh/osu/${i} -o ${output_folder}/${i}.osu
 done
