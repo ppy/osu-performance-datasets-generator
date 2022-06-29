@@ -1,6 +1,8 @@
 #!/bin/bash
 # Executes the monthly dump of datasets for osu-performance development purposes.
 
+set -e
+
 find /var/www/html/*performance*.bz2 -depth -type f -ctime +180 -delete &> /dev/null
 find /var/www/html/*files*.bz2 -depth -type f -ctime +180 -delete &> /dev/null
 
