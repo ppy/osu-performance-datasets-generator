@@ -1,12 +1,11 @@
 #!/bin/bash
 # Select relevant sample users and dump to a file.
 
+source ./globals.sh
+
+RULESET=$1
+SAMPLE=$2
 USER_COUNT=$3
-
-DATABASE_HOST=db-delayed
-DATABASE_USER=performance-export
-
-OUTPUT_PATH=/var/www/html/
 
 sql() {
     mysql osu -sN -h "${DATABASE_HOST}" -u "${DATABASE_USER}" -e "SELECT('$1'); $2; SELECT CONCAT('✓ Completed with ', ROW_COUNT(), ' rows.');"
@@ -19,7 +18,7 @@ dump() {
     echo "✓ Completed with $(stat -c%s "${path}") bytes."
 }
 
-case "$1" in
+case "$RULESET" in
     osu)
         mode_index=0
         suffix="_osu"
@@ -54,8 +53,7 @@ sample_users_table="sample_users"
 sample_beatmapsets_table="sample_beatmapsets${table_suffix}"
 sample_beatmaps_table="sample_beatmaps${table_suffix}"
 
-date=$(date +"%Y_%m_%d")
-output_folder="${date}_performance${main_suffix}_${2}_${3}"
+output_folder="${DATE}_performance${main_suffix}_${SAMPLE}_${USER_COUNT}"
 
 # WHERE clause to exclude invalid beatmaps
 beatmap_set_validity_check="approved > 0 AND deleted_at IS NULL"
@@ -72,7 +70,7 @@ sql "Creating sample_users table"         "DROP TABLE IF EXISTS ${sample_users_t
 sql "Creating sample_beatmapsets table"   "DROP TABLE IF EXISTS ${sample_beatmapsets_table}; CREATE TABLE ${sample_beatmapsets_table} ( beatmapset_id INT PRIMARY KEY );"
 sql "Creating sample_beatmaps table"      "DROP TABLE IF EXISTS ${sample_beatmaps_table}; CREATE TABLE ${sample_beatmaps_table} ( beatmap_id INT PRIMARY KEY );"
 
-if [ "$2" == "random" ] ; then
+if [ "$SAMPLE" == "random" ] ; then
     sql "Populating random users.."     "INSERT IGNORE INTO ${sample_users_table} (user_id) SELECT user_id FROM osu_user_stats${table_suffix} WHERE rank_score > 0 ORDER BY RAND(1) LIMIT $USER_COUNT;"
 else
     sql "Populating top users.."        "INSERT IGNORE INTO ${sample_users_table} (user_id) SELECT user_id FROM osu_user_stats${table_suffix} ORDER BY rank_score desc LIMIT $USER_COUNT"

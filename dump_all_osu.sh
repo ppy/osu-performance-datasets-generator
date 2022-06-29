@@ -1,13 +1,9 @@
 #!/bin/bash
 # Dump .osu files from all ranked/approved/qualified/loved beatmapsets.
 
-DATABASE_HOST=db-delayed
-DATABASE_USER=performance-export
+source ./globals.sh
 
-OUTPUT_PATH=/var/www/html/
-
-date=$(date +"%Y_%m_%d")
-output_folder="${date}_osu_files"
+output_folder="${DATE}_osu_files"
 
 mkdir -p ${output_folder}
 
