@@ -21,3 +21,12 @@ find /var/www/html/*files*.bz2 -depth -type f -ctime +180 -delete &> /dev/null
 ./dump_sample_tables.sh mania top 1000
 
 ./dump_all_osu.sh
+
+./s3_prune.sh
+
+for f in ./*.bz2; do
+  ./s3_upload.sh *.bz2
+done
+
+./s3_index.sh
+./s3_upload.sh index.html
