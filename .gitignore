@@ -2,3 +2,4 @@
 *.bz2
 index.html
 */*
+!.github/*
