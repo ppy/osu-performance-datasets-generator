@@ -3,7 +3,8 @@
 
 source ./globals.sh
 
-output_folder="work/${DATE}_osu_files"
+cd work
+output_folder="${DATE}_osu_files"
 
 mkdir -p ${output_folder}
 

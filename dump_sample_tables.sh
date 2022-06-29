@@ -53,7 +53,8 @@ sample_users_table="sample_users"
 sample_beatmapsets_table="sample_beatmapsets${table_suffix}"
 sample_beatmaps_table="sample_beatmaps${table_suffix}"
 
-output_folder="work/${DATE}_performance${main_suffix}_${SAMPLE}_${USER_COUNT}"
+cd work
+output_folder="${DATE}_performance${main_suffix}_${SAMPLE}_${USER_COUNT}"
 
 # WHERE clause to exclude invalid beatmaps
 beatmap_set_validity_check="approved > 0 AND deleted_at IS NULL"
