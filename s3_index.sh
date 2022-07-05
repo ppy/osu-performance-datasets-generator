@@ -2,7 +2,7 @@
 
 source ./globals.sh
 
-files_list=$(aws s3 ls "s3://$S3_BUCKET")
+files_list=$(aws s3 ls "s3://$S3_BUCKET" $AWSCLI_SUFFIX)
 
 cat >index.html <<EOL
 <html>

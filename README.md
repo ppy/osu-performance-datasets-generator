@@ -4,7 +4,8 @@ Set of scripts generating SQL and .osu dumps from production for osu-performance
 
 # Usage
 
-Run `./dump_all.sh` monthly with the following environment variables: `AWS_ACCESS_KEY_ID`, `AWS_SECRET_ACCESS_KEY`, `DATABASE_HOST`, `DATABASE_USER`
+Run `./dump_all.sh` monthly with the following environment variables: `AWS_ACCESS_KEY_ID`, `AWS_SECRET_ACCESS_KEY`, `DATABASE_HOST`, `DATABASE_USER`.  
+For DigitalOcean Spaces support, also set `AWSCLI_SUFFIX`, eg `AWSCLI_SUFFIX=--endpoint=https://nyc3.digitaloceanspaces.com`
 
 ~16GB of free disk space is recommended (estimated).
 

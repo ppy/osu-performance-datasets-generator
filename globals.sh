@@ -7,4 +7,6 @@ DATABASE_USER="${DATABASE_USER:-performance-export}"
 
 S3_BUCKET="${S3_BUCKET:-data.ppy.sh}"
 
+AWSCLI_SUFFIX="${AWSCLI_SUFFIX:-}"
+
 DATE=$(date +"%Y_%m_%d")
