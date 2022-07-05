@@ -6,7 +6,9 @@ Set of scripts generating SQL and .osu dumps from production for osu-performance
 
 Run `./dump_all.sh` monthly with the following environment variables: `AWS_ACCESS_KEY_ID`, `AWS_SECRET_ACCESS_KEY`, `S3_BUCKET`, `DATABASE_HOST`, `DATABASE_USER`. Default canned ACL can also be set using `S3_ACL`.
 
-For DigitalOcean Spaces support, also set `AWSCLI_SUFFIX`, eg `AWSCLI_SUFFIX=--endpoint=https://nyc3.digitaloceanspaces.com`. `S3_ACL` can be set to `private` or `public-read`
+For DigitalOcean Spaces support, also set `AWSCLI_SUFFIX`, eg `AWSCLI_SUFFIX=--endpoint=https://nyc3.digitaloceanspaces.com`. `S3_ACL` can be set to `private` or `public-read`.
+
+For s3-nginx-proxy purge support, `S3_PUBLIC_URL` and `S3_PURGE_AUTHORIZATION_KEY` need to be set.
 
 ~16GB of free disk space is recommended (estimated).
 

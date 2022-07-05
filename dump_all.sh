@@ -27,3 +27,4 @@ done
 
 ./s3_index.sh
 ./s3_upload.sh index.html
+./s3_purge_cache_file.sh index.html
