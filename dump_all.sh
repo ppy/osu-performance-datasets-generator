@@ -22,7 +22,7 @@ set -e
 ./s3_prune.sh
 
 for f in ./*.bz2; do
-  ./s3_upload.sh *.bz2
+  ./s3_upload.sh "$f"
 done
 
 ./s3_index.sh
