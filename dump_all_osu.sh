@@ -8,9 +8,9 @@ output_folder="${DATE}_osu_files"
 
 mkdir -p ${output_folder}
 
-for i in $( mysql osu -sN -h "${DATABASE_HOST}" -u "${DATABASE_USER}" -e "select beatmap_id from osu_beatmaps WHERE approved > 0 AND deleted_at IS NULL" ); do
+for i in $( mysql osu -sN -h "${DATABASE_HOST}" -u "${DATABASE_USER}" "${DATABASE_PASSWORD}" -e "select beatmap_id from osu_beatmaps WHERE approved > 0 AND deleted_at IS NULL" ); do
     echo "Downloading ${i}..."
-    curl -s https://osu.ppy.sh/osu/${i} -o ${output_folder}/${i}.osu
+    AWS_ACCESS_KEY_ID="$OSU_DOWNLOAD_AWS_ACCESS_KEY_ID" AWS_SECRET_ACCESS_KEY="$OSU_DOWNLOAD_AWS_SECRET_ACCESS_KEY" aws s3 cp "s3://$OSU_DOWNLOAD_S3_BUCKET/$i" ${output_folder}/${i}.osu --endpoint="$OSU_DOWNLOAD_S3_ENDPOINT"
 done
 
 echo

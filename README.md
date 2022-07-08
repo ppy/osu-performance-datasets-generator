@@ -2,13 +2,18 @@
 
 Set of scripts generating SQL and .osu dumps from production for osu-performance developers to use locally.
 
+These scripts are for internal use only. Please find the dumps on https://data.ppy.sh.
+
 # Usage
 
-Run `./dump_all.sh` monthly with the following environment variables: `AWS_ACCESS_KEY_ID`, `AWS_SECRET_ACCESS_KEY`, `S3_BUCKET`, `DATABASE_HOST`, `DATABASE_USER`. Default canned ACL can also be set using `S3_ACL`.
+Run `./dump_all.sh` monthly with the following environment variables:
+- beatmaps S3 bucket: `OSU_DOWNLOAD_AWS_ACCESS_KEY_ID`, `OSU_DOWNLOAD_AWS_SECRET_ACCESS_KEY`, `OSU_DOWNLOAD_S3_BUCKET`, `OSU_DOWNLOAD_S3_ENDPOINT`
+- data.ppy.sh S3 bucket: `DUMPS_UPLOAD_AWS_ACCESS_KEY_ID`, `DUMPS_UPLOAD_AWS_SECRET_ACCESS_KEY`, `DUMPS_UPLOAD_S3_BUCKET`, `DUMPS_UPLOAD_S3_ENDPOINT`, `DUMPS_UPLOAD_S3_ACL` (optional)
+- osu! database: `DATABASE_HOST`, `DATABASE_USER`, `DATABASE_PASSWORD` (optional)
 
-For DigitalOcean Spaces support, also set `AWSCLI_SUFFIX`, eg `AWSCLI_SUFFIX=--endpoint=https://nyc3.digitaloceanspaces.com`. `S3_ACL` can be set to `private` or `public-read`.
+For DigitalOcean Spaces support, `DUMPS_UPLOAD_S3_ENDPOINT` and `DUMPS_UPLOAD_S3_ACL` need different values, eg `DUMPS_UPLOAD_S3_ENDPOINT=https://nyc3.digitaloceanspaces.com` and `DUMPS_UPLOAD_S3_ACL=public-read`.
 
-For s3-nginx-proxy purge support, `S3_PUBLIC_URL` and `S3_PURGE_AUTHORIZATION_KEY` need to be set.
+For s3-nginx-proxy purge support, `DUMPS_UPLOAD_S3_PUBLIC_URL` and `DUMPS_UPLOAD_S3_PURGE_AUTHORIZATION_KEY` need to be set (optional).
 
 ~16GB of free disk space is recommended (estimated).
 

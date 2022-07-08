@@ -20,10 +20,11 @@ set -e
 ./dump_all_osu.sh
 
 ./s3_prune.sh
-
-for f in ./*.bz2; do
-  ./s3_upload.sh "$f"
-done
+if [[ $(ls -1 ./work | wc -l) != "0" ]]; then
+  for f in ./work/*; do
+    ./s3_upload.sh "$f"
+  done
+fi
 
 ./s3_index.sh
 ./s3_upload.sh index.html

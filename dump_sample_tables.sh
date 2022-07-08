@@ -8,13 +8,13 @@ SAMPLE=$2
 USER_COUNT=$3
 
 sql() {
-    mysql osu -sN -h "${DATABASE_HOST}" -u "${DATABASE_USER}" -e "SELECT('$1'); $2; SELECT CONCAT('✓ Completed with ', ROW_COUNT(), ' rows.');"
+    mysql osu -sN -h "${DATABASE_HOST}" -u "${DATABASE_USER}" "${DATABASE_PASSWORD}" -e "SELECT('$1'); $2; SELECT CONCAT('✓ Completed with ', ROW_COUNT(), ' rows.');"
 }
 
 dump() {
     echo "Dumping $1..."
     path=${output_folder}/${1}.sql
-    mysqldump --set-gtid-purged=OFF --single-transaction -h "${DATABASE_HOST}" -u "${DATABASE_USER}" osu $1 --where="${2:-1=1}" > ${path}
+    mysqldump --set-gtid-purged=OFF --single-transaction -h "${DATABASE_HOST}" -u "${DATABASE_USER}" "${DATABASE_PASSWORD}" osu $1 --where="${2:-1=1}" > ${path}
     echo "✓ Completed with $(stat -c%s "${path}") bytes."
 }
 

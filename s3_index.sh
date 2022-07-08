@@ -2,7 +2,7 @@
 
 source ./globals.sh
 
-files_list=$(aws s3 ls "s3://$S3_BUCKET" $AWSCLI_SUFFIX)
+files_list=$(AWS_ACCESS_KEY_ID="$DUMPS_UPLOAD_AWS_ACCESS_KEY_ID" AWS_SECRET_ACCESS_KEY="$DUMPS_UPLOAD_AWS_SECRET_ACCESS_KEY" aws s3 ls "s3://$DUMPS_UPLOAD_S3_BUCKET" --endpoint="$DUMPS_UPLOAD_S3_ENDPOINT")
 
 cat >index.html <<EOL
 <html>
