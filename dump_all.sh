@@ -20,6 +20,11 @@ set -e
 ./dump_all_osu.sh
 
 ./s3_prune.sh
+
+./s3_index.sh
+./s3_upload.sh index.html
+./s3_purge_cache_file.sh index.html
+
 if [[ $(ls -1 ./work | wc -l) != "0" ]]; then
   for f in ./work/*; do
     ./s3_upload.sh "$f"
