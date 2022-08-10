@@ -6,4 +6,4 @@ if [ -n "${DATABASE_PASSWORD}" ]; then
   DATABASE_PASSWORD="-p${DATABASE_PASSWORD}"
 fi
 
-DATE=$(date +"%Y_%m_%d")
+DATE=$(TZ=UTC date +"%Y_%m_%d")
