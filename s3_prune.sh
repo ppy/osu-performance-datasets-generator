@@ -5,7 +5,7 @@ source ./globals.sh
 files_list=$((AWS_ACCESS_KEY_ID="$DUMPS_UPLOAD_AWS_ACCESS_KEY_ID" AWS_SECRET_ACCESS_KEY="$DUMPS_UPLOAD_AWS_SECRET_ACCESS_KEY" aws s3 ls "s3://$DUMPS_UPLOAD_S3_BUCKET" --endpoint="$DUMPS_UPLOAD_S3_ENDPOINT" | grep "\\.bz2$") || true)
 
 get_months() {
-  echo $(( $(date -d "$1" +%Y) * 12 + $(date -d "$1" +%m) - 1 ))
+  echo $(( $(date -d "$1" +%Y) * 12 + "10#$(date -d "$1" +%m)" - 1 ))
 }
 
 current_months=$(get_months $(date +"%Y-%m-%d"))
