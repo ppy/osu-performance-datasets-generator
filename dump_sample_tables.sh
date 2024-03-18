@@ -93,6 +93,9 @@ dump "osu_scores${table_suffix}_high"   "user_id IN (SELECT user_id FROM ${sampl
 dump "osu_user_stats${table_suffix}"    "user_id IN (SELECT user_id FROM ${sample_users_table})"
 dump "osu_user_beatmap_playcount"       "user_id IN (SELECT user_id FROM ${sample_users_table}) AND beatmap_id IN (SELECT beatmap_id FROM ${sample_beatmaps_table})"
 
+# scores in osu!(lazer)
+dump "scores"   "user_id IN (SELECT user_id FROM ${sample_users_table}) AND preserve = 1 AND ranked = 1 AND ruleset_id = ${mode_index}"
+
 # beatmap tables (we only care about ranked/approved/loved beatmaps)
 dump "osu_beatmapsets"                  "beatmapset_id IN (SELECT beatmapset_id FROM ${sample_beatmapsets_table})"
 dump "osu_beatmaps"                     "beatmap_id IN (SELECT beatmap_id FROM ${sample_beatmaps_table})"
