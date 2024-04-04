@@ -26,7 +26,7 @@ set -e
 ./s3_purge_cache_file.sh index.html
 
 if [[ $(ls -1 ./work | wc -l) != "0" ]]; then
-  for f in ./work/*; do
+  for f in $(find ./work -type f); do
     ./s3_upload.sh "$f"
   done
 fi
