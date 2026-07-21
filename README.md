@@ -15,6 +15,9 @@ For DigitalOcean Spaces support, `DUMPS_UPLOAD_S3_ENDPOINT` and `DUMPS_UPLOAD_S3
 
 For s3-nginx-proxy purge support, `DUMPS_UPLOAD_S3_PUBLIC_URL` and `DUMPS_UPLOAD_S3_PURGE_AUTHORIZATION_KEY` need to be set (optional).
 
+For permanent setup, set `PRUNE_WORKDIR` to clean the working directory before each run.  
+Cron mode can be enabled by setting `SCHEDULE` to a cron expression. The container will execute the script on schedule and remain running at all time.
+
 ~16GB of free disk space is recommended (estimated).
 
 # Contributing

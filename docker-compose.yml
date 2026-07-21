@@ -1,0 +1,9 @@
+services:
+  cronjob:
+    build: .
+    volumes:
+      - ./work:/src/work
+    env_file:
+      - .env
+    network_mode: host
+    restart: unless-stopped

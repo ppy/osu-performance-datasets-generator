@@ -3,6 +3,11 @@
 
 set -e
 
+# If PRUNE_WORKDIR is set, the script will prune the local work directory before dumping the sample tables. This is useful for saving disk space when running the script on a local machine.
+if [[ -n "$PRUNE_WORKDIR" ]]; then
+  rm -rf ./work/*
+fi
+
 ./dump_sample_tables.sh osu top 10000
 ./dump_sample_tables.sh osu random 10000
 ./dump_sample_tables.sh taiko top 10000
